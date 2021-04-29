@@ -25,9 +25,7 @@
   },
   "homepage": "https://github.com/licaomeng/build-entry#readme",
   "dependencies": {
+    "chalk": "^4.1.1",
     "folder-hash": "^4.0.1"
-  },
-  "devDependencies": {
-    "chalk": "^4.1.1"
   }
 }
