@@ -94,7 +94,7 @@ async function exec(...args) {
       fs.writeFileSync(__hashJson, JSON.stringify(hashInfo));
     }
   }
-  console.log(chalk.green(`${modeMap[mode]} build done!`));
+  console.log(chalk.green(`${modeMap[mode]} ${cmd} done!`));
 }
 
 module.exports = exec;
