@@ -1,0 +1,33 @@
+{
+  "name": "walk-from-entry",
+  "version": "0.0.1",
+  "description": "walk a monorepo from entry",
+  "main": "index.js",
+  "bin": {
+    "build-from-entry": "index.js"
+  },
+  "scripts": {
+    "build-entry": "node build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/licaomeng/build-entry.git"
+  },
+  "keywords": [
+    "build",
+    "node"
+  ],
+  "author": "Messi Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/licaomeng/build-entry/issues"
+  },
+  "homepage": "https://github.com/licaomeng/build-entry#readme",
+  "dependencies": {
+    "folder-hash": "^4.0.1"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.1"
+  }
+}
