@@ -4,10 +4,9 @@
   "description": "walk a monorepo from entry",
   "main": "index.js",
   "bin": {
-    "build-from-entry": "index.js"
+    "walk-from-entry": "index.js"
   },
   "scripts": {
-    "build-entry": "node build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

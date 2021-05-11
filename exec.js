@@ -21,7 +21,7 @@ function getDepsFromEntry(entryDir) {
       return arr;
     }
     const tsconfig = path.join(currDir, tsconfigJSON);
-    // base
+    // base case
     if (!fs.existsSync(tsconfig)) {
       return arr;
     }
@@ -53,7 +53,7 @@ function validateArgs(cmd, mode) {
 }
 
 async function exec(...args) {
-  const [cmd, mode = '--incremental'] = args;
+  const [cmd, mode = '--incremental', ...opts] = args;
   const errMsg = validateArgs(cmd, mode);
   if (errMsg) {
     console.log(errMsg);
@@ -64,6 +64,7 @@ async function exec(...args) {
   const dirs = Array.from(new Set(deps));
 
   console.log(`start ${chalk.yellow(cmd)} from the entry path: ${chalk.blue(entryDir)}`);
+  console.time('total time');
 
   for (let i = 0; i < dirs.length; i++) {
     const dir = dirs[i];
@@ -90,11 +91,12 @@ async function exec(...args) {
       cwd: dir,
       stdio: 'inherit',
     });
-    if (fs.existsSync(dist)) {
+    if (fs.existsSync(dist) && !opts.includes('--no-hash') && !opts.includes('-n')) {
       fs.writeFileSync(__hashJson, JSON.stringify(hashInfo));
     }
   }
   console.log(chalk.green(`${modeMap[mode]} ${cmd} done!`));
+  console.timeEnd('total time');
 }
 
 module.exports = exec;
