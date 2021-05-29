@@ -62,6 +62,7 @@ async function exec(...args) {
 
   const deps = getDepsFromEntry(entryDir);
   const dirs = Array.from(new Set(deps));
+  let count = 0;
 
   console.log(`start ${chalk.yellow(cmd)} from the entry path: ${chalk.blue(entryDir)}`);
   console.time('total time');
@@ -94,8 +95,10 @@ async function exec(...args) {
     if (fs.existsSync(dist) && !opts.includes('--no-hash') && !opts.includes('-n')) {
       fs.writeFileSync(__hashJson, JSON.stringify(hashInfo));
     }
+    count = i;
   }
   console.log(chalk.green(`${modeMap[mode]} ${cmd} done!`));
+  console.log(chalk.yellow(count <= 1 ? `${count} package` : `${count} packages`));
   console.timeEnd('total time');
 }
 
