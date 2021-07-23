@@ -95,7 +95,7 @@ async function exec(...args) {
     if (fs.existsSync(dist) && !opts.includes('--no-hash') && !opts.includes('-n')) {
       fs.writeFileSync(__hashJson, JSON.stringify(hashInfo));
     }
-    count = i;
+    count++;
   }
   console.log(chalk.green(`${modeMap[mode]} ${cmd} done!`));
   console.log(chalk.yellow(count <= 1 ? `${count} package` : `${count} packages`));
