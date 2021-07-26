@@ -1,6 +1,6 @@
 {
   "name": "walk-from-entry",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "walk a monorepo from entry",
   "main": "index.js",
   "bin": {
