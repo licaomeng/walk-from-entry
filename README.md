@@ -7,15 +7,25 @@ Walk through a monorepo to execute commands like `npm run build` `npm run test`,
 `npx walk-from-entry <command> <command-mode> [command-arg]...`
 
 - `<command>`: build, test, lint...
-- `<command-mode>`: --fast, --full, --incremental/-inc
+- `<command-mode>`: --fast, --full, --incremental/-inc (default to be --incremental/-inc)
 - `[command-arg]`: --no-hash/-n
 
 ## Usage
 
 1. Switch to your entry directory.
-2. run the command `npx walk-from-entry build -inc`
+2. Run the command `npx walk-from-entry build`
 
-> The above command is equivalent to incrementally executing `npm run build` across all dependencies packages in the monorepo.
+> The above command is equivalent to incrementally executing `npm run build` across all dependencies packages in the monorepo (`npx walk-from-entry build --incremental`, `npx walk-from-entry build -inc`).
+
+3. Create a `.walkignore` under the entry directory to ignore the path you'd like to skip. The `.walkignore` looks like:
+
+```
+*/**/foo*
+*/**/bar*
+*/**/baz*
+```
+
+> The ignore wildcard function leverage the open-source project [micromatch](https://github.com/micromatch/micromatch), for more matching feature detail, please see [here](https://github.com/micromatch/micromatch#matching-features).
 
 ## Description
 

@@ -2,9 +2,16 @@ const fs = require('fs');
 const cp = require('child_process');
 const path = require('path');
 const chalk = require('chalk');
+const micromatch = require('micromatch');
 const entryDir = process.cwd();
 const hash = require('./hash');
 const tsconfigJSON = 'tsconfig.json';
+const walkIgnore = '.walkignore';
+const NEWLINES_MATCH = /\r\n|\n|\r/;
+
+const walkIgnorePath = path.join(entryDir, walkIgnore);
+const ignoreList = fs.existsSync(walkIgnorePath) ?
+  fs.readFileSync(walkIgnorePath).toString().split(NEWLINES_MATCH).filter(x => x).map(i => i.replace(/\\/g, '/')) : []
 
 const modeMap = {
   '--fast': 'fast',
@@ -87,6 +94,9 @@ async function exec(...args) {
       ) {
         continue;
       }
+    }
+    if (micromatch.isMatch(dir, ignoreList)) {
+      continue;
     }
     cp.execSync(`npm run ${cmd}`, {
       cwd: dir,
